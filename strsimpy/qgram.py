@@ -41,11 +41,7 @@ class QGram(ShingleBased, StringDistance):
 
     @staticmethod
     def distance_profile(profile0, profile1):
-        union = set()
-        for k in profile0.keys():
-            union.add(k)
-        for k in profile1.keys():
-            union.add(k)
+        union = set().union(profile0.keys(), profile1.keys())
         agg = 0
         for k in union:
             v0, v1 = 0, 0

@@ -18,11 +18,7 @@ class OverlapCoefficient(ShingleBased, NormalizedStringDistance, NormalizedStrin
             raise TypeError("Argument s1 is NoneType.")
         if s0 == s1:
             return 1.0
-        union = set()
         profile0, profile1 = self.get_profile(s0), self.get_profile(s1)
-        for k in profile0.keys():
-            union.add(k)
-        for k in profile1.keys():
-            union.add(k)
+        union = set().union(profile0.keys(), profile1.keys())
         inter = int(len(profile0.keys()) + len(profile1.keys()) - len(union))
         return inter / min(len(profile0), len(profile1))

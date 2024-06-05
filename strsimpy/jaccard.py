@@ -40,12 +40,7 @@ class Jaccard(ShingleBased, MetricStringDistance, NormalizedStringDistance, Norm
             return 1.0
         if len(s0) < self.get_k() or len(s1) < self.get_k():
             return 0.0
-        profile0 = self.get_profile(s0)
-        profile1 = self.get_profile(s1)
-        union = set()
-        for ite in profile0.keys():
-            union.add(ite)
-        for ite in profile1.keys():
-            union.add(ite)
+        profile0, profile1 = self.get_profile(s0), self.get_profile(s1)
+        union = set().union(profile0.keys(), profile1.keys())
         inter = int(len(profile0.keys()) + len(profile1.keys()) - len(union))
         return 1.0 * inter / len(union)
